@@ -1,134 +1,95 @@
 <template>
-  <div id="app" class="app-container">
-    <!-- Counter and Reset -->
-    <div class="counter-section">
-      <h1 class="text-2xl md:text-3xl">Counter</h1>
-      <div class="counter-container">
-        <button @click="decrement" class="btn">-</button>
-        <span class="counter-value">{{ count }}</span>
-        <button @click="increment" class="btn">+</button>
+  <div id="app">
+    <h1>Vue Komponen</h1>
+    <div class="components-container">
+      <div class="component-wrapper">
+        <Counter />
       </div>
-      <button @click="reset" class="reset-button">Reset</button>
-    </div>
-
-    <!-- Color Changer -->
-    <div class="color-changer">
-      <h1 class="text-2xl md:text-3xl">Change Background Color</h1>
-      <div class="color-buttons">
-        <button v-for="color in colors" :key="color" :style="{ backgroundColor: color }" @click="changeColor(color)" class="color-button">
-          {{ color }}
-        </button>
+      <div class="component-wrapper">
+        <ColorChanger />
+      </div>
+      <div class="component-wrapper">
+        <ImageCarousel />
       </div>
     </div>
-
-    <!-- Carousel -->
-    <Carousel />
   </div>
 </template>
 
 <script>
-import Carousel from './components/Carousel.vue';
+import Counter from './components/Counter.vue';
+import ColorChanger from './components/ColorChanger.vue';
+import ImageCarousel from './components/ImageCarousel.vue';
 
 export default {
   name: 'App',
   components: {
-    Carousel
-  },
-  data() {
-    return {
-      count: 0,
-      colors: ['white', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD']
-    };
-  },
-  methods: {
-    increment() {
-      this.count += 1;
-    },
-    decrement() {
-      if (this.count > 0) {
-        this.count -= 1;
-      }
-    },
-    reset() {
-      this.count = 0;
-    },
-    changeColor(color) {
-      document.body.style.backgroundColor = color;
-    }
+    Counter,
+    ColorChanger,
+    ImageCarousel
   }
-};
+}
 </script>
 
 <style>
-/* General Styles */
-html, body {
-  height: 100%;
+/* Reset some default styles */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 #app {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
-}
-
-/* Counter Section */
-.counter-section {
-  margin: 20px;
-}
-
-.counter-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.counter-value {
-  font-size: 2em;
-  color: brown;
-}
-
-.btn {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-/* Reset Button */
-.reset-button {
-  margin-top: 20px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-}
-
-/* Color Changer */
-.color-changer {
-  margin: 20px;
-}
-
-.color-buttons {
-  display: flex;
-  gap: 10px;
   justify-content: center;
-  flex-wrap: wrap;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc; /* Light background color */
+  color: #333; /* Text color */
+  min-height: 100vh; /* Ensure the app takes up full viewport height */
+  padding: 20px; /* Add padding to avoid content touching the edges */
 }
 
-.color-button {
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1em;
+h1 {
+  color: #4a90e2; /* Heading color */
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.components-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Spacing between components */
+}
+
+.component-wrapper {
+  width: 100%;
+  max-width: 600px; /* Limit width for better readability */
+  background-color: #ffffff; /* White background for components */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.component-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .components-container {
+    flex-direction: column;
+    gap: 15px; /* Adjust gap for smaller screens */
+  }
 }
 </style>
